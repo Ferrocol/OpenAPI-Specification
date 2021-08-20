@@ -1,0 +1,1076 @@
+{
+  "components": {
+    "schemas": {
+      "GratuityOfferDto": {
+        "type": "object",
+        "required": [
+          "id",
+          "price"
+        ],
+        "properties": {
+          "price": {
+            "type": "number"
+          },
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        }
+      },
+      "GratuityPaymentDto": {
+        "type": "object",
+        "required": [
+          "createdAt",
+          "offerId",
+          "price",
+          "transactionId",
+          "userId"
+        ],
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "offerId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "userId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "transactionId": {
+            "format": "int64",
+            "type": "integer"
+          }
+        }
+      },
+      "LocalTime": {
+        "type": "object",
+        "properties": {
+          "hour": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "nano": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "minute": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "second": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "OrderItemDto": {
+        "type": "object",
+        "required": [
+          "displayText",
+          "fullSubtotal",
+          "menuItemId",
+          "modifierSubtotal",
+          "modifiers",
+          "orderItemId",
+          "price"
+        ],
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "orderItemId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "specialInstructions": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "fullSubtotal": {
+            "type": "number"
+          },
+          "modifierSubtotal": {
+            "type": "number"
+          },
+          "modifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItemModifierDto"
+            }
+          },
+          "hash": {
+            "type": "string"
+          },
+          "menuItemId": {
+            "format": "int64",
+            "type": "integer"
+          }
+        }
+      },
+      "ExampleUserDto": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "accountId": {
+            "format": "int64",
+            "type": "integer"
+          }
+        }
+      },
+      "GratuityEligibilityDto": {
+        "type": "object",
+        "required": [
+          "isEligible"
+        ],
+        "properties": {
+          "ineligibilityReason": {
+            "type": "string"
+          },
+          "isEligible": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SubscriptionUpdateRequestDto": {
+        "type": "object",
+        "required": [
+          "creditCardProfileId"
+        ],
+        "properties": {
+          "creditCardProfileId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "paymentMethodId": {
+            "type": "string"
+          }
+        }
+      },
+      "OrderAddressDto": {
+        "type": "object",
+        "properties": {
+          "zipCode": {
+            "type": "string"
+          },
+          "googlePlaceId": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "zipPrecision": {
+            "type": "string"
+          }
+        }
+      },
+      "SubscriptionTrialInformationDto": {
+        "type": "object",
+        "required": [
+          "length",
+          "unit"
+        ],
+        "properties": {
+          "unit": {
+            "type": "string",
+            "enum": [
+              "MONTH",
+              "WEEK",
+              "DAY"
+            ]
+          },
+          "length": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "GratuityDto": {
+        "type": "object",
+        "required": [
+          "eligibility",
+          "offers"
+        ],
+        "properties": {
+          "offers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GratuityOfferDto"
+            }
+          },
+          "eligibility": {
+            "$ref": "#/components/schemas/GratuityEligibilityDto"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/GratuityPaymentDto"
+          }
+        }
+      },
+      "SubscriptionOfferCombinedResponseDto": {
+        "type": "object",
+        "required": [
+          "offer"
+        ],
+        "properties": {
+          "offer": {
+            "$ref": "#/components/schemas/SubscriptionOfferResponseDto"
+          },
+          "subscription": {
+            "$ref": "#/components/schemas/SubscriptionResponseDto"
+          }
+        }
+      },
+      "AddCardResponseDto": {
+        "type": "object",
+        "required": [
+          "id",
+          "lastFour",
+          "userId",
+          "zip"
+        ],
+        "properties": {
+          "lastFour": {
+            "type": "string"
+          },
+          "zip": {
+            "type": "string"
+          },
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "userId": {
+            "format": "int64",
+            "type": "integer"
+          }
+        }
+      },
+      "OrderDetailDto": {
+        "type": "object",
+        "required": [
+          "canReorder",
+          "deliveryDate",
+          "deliveryDateTime",
+          "deliveryDropoffId",
+          "expectedDeliveryTimeDisplay",
+          "expectedTime",
+          "expectedTimeEnd",
+          "foodsbyFee",
+          "gratuity",
+          "isCouponEpp",
+          "isForDynamicDrop",
+          "isPastCutoff",
+          "itemSubtotal",
+          "locationId",
+          "locationName",
+          "locationType",
+          "locationTypeOrdinal",
+          "logoUrl",
+          "orderDate",
+          "orderId",
+          "orderItems",
+          "orderTotal",
+          "originalDeliveryDateTime",
+          "originalTime",
+          "preTaxSubtotal",
+          "status",
+          "statusText",
+          "storeId",
+          "storeName",
+          "storeTimeZone",
+          "subtotal",
+          "taxTotal",
+          "userId"
+        ],
+        "properties": {
+          "orderId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "taxTotal": {
+            "type": "number"
+          },
+          "locationType": {
+            "type": "string"
+          },
+          "canReorder": {
+            "type": "boolean"
+          },
+          "couponId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "originalDeliveryDateTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "itemSubtotal": {
+            "type": "number"
+          },
+          "heartlandId": {
+            "type": "string"
+          },
+          "locationTypeOrdinal": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "programName": {
+            "type": "string"
+          },
+          "deliveryDateTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "storePhone": {
+            "type": "string"
+          },
+          "isPastCutoff": {
+            "type": "boolean"
+          },
+          "menuId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "foodsbyFee": {
+            "type": "number"
+          },
+          "creditSubtotal": {
+            "type": "number"
+          },
+          "logoUrl": {
+            "type": "string"
+          },
+          "subtotal": {
+            "type": "number"
+          },
+          "orderDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "status": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "deliveryTime": {
+            "$ref": "#/components/schemas/LocalTime"
+          },
+          "gratuity": {
+            "$ref": "#/components/schemas/GratuityDto"
+          },
+          "orderItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItemDto"
+            }
+          },
+          "programSubtotal": {
+            "type": "number"
+          },
+          "originalTime": {
+            "$ref": "#/components/schemas/LocalTime"
+          },
+          "couponSubtotal": {
+            "type": "number"
+          },
+          "locationId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "storeTimeZone": {
+            "type": "string"
+          },
+          "storeName": {
+            "type": "string"
+          },
+          "preTaxSubtotal": {
+            "type": "number"
+          },
+          "deliveryDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/OrderAddressDto"
+          },
+          "locationName": {
+            "type": "string"
+          },
+          "isForDynamicDrop": {
+            "type": "boolean"
+          },
+          "isCouponEpp": {
+            "type": "boolean"
+          },
+          "ccLastFour": {
+            "type": "string"
+          },
+          "deliveryDropoffId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "storeId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "userId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "orderTotal": {
+            "type": "number"
+          },
+          "expectedTime": {
+            "$ref": "#/components/schemas/LocalTime"
+          },
+          "expectedTimeEnd": {
+            "$ref": "#/components/schemas/LocalTime"
+          },
+          "storedCurrencySubtotal": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "statusText": {
+            "type": "string"
+          },
+          "pickupInstructions": {
+            "type": "string"
+          },
+          "expectedDeliveryTimeDisplay": {
+            "type": "string"
+          },
+          "couponCode": {
+            "type": "string"
+          },
+          "programId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          }
+        }
+      },
+      "OrderItemModifierAnswerDto": {
+        "type": "object",
+        "required": [
+          "displayText",
+          "price"
+        ],
+        "properties": {
+          "displayText": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          }
+        }
+      },
+      "OrderItemModifierDto": {
+        "type": "object",
+        "required": [
+          "answers",
+          "depth",
+          "questionId"
+        ],
+        "properties": {
+          "depth": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "questionId": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItemModifierAnswerDto"
+            }
+          }
+        }
+      },
+      "AddCardRequestDto": {
+        "type": "object",
+        "required": [
+          "cardholderName",
+          "expirationMonth",
+          "expirationYear",
+          "lastFour",
+          "singleUseToken",
+          "zip"
+        ],
+        "properties": {
+          "lastFour": {
+            "type": "string"
+          },
+          "zip": {
+            "type": "string"
+          },
+          "expirationYear": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "cardholderName": {
+            "type": "string"
+          },
+          "recaptchaToken": {
+            "type": "string"
+          },
+          "singleUseToken": {
+            "type": "string"
+          },
+          "expirationMonth": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "SubscriptionOfferResponseDto": {
+        "type": "object",
+        "properties": {
+          "offer": {
+            "$ref": "#/components/schemas/SubscriptionOfferDto"
+          },
+          "ineligibilityReason": {
+            "type": "string",
+            "enum": [
+              "INFORMATION_FAILURE",
+              "INELIGIBLE_LOCATION",
+              "EMPLOYER_PROGRAM",
+              "ALREADY_SUBSCRIBED"
+            ]
+          }
+        }
+      },
+      "UserProfileDetailDto": {
+        "type": "object",
+        "required": [
+          "createdDate",
+          "profileId",
+          "userId",
+          "username",
+          "verifiedBefore",
+          "verifiedEmail"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "avatarId": {
+            "type": "string"
+          },
+          "createdDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "profileId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "locationId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "verifiedBefore": {
+            "type": "boolean"
+          },
+          "userId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "verifiedEmail": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SubscriptionResponseDto": {
+        "type": "object",
+        "required": [
+          "id",
+          "locationId",
+          "status",
+          "subscriptionFee",
+          "userId"
+        ],
+        "properties": {
+          "trialEnd": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "nextPaymentDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "subscriptionFee": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "creditCardProfileId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "trialStart": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "userId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "creditCardLastFour": {
+            "type": "string"
+          },
+          "previousPaymentDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "canceledDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "locationId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "paymentMethodId": {
+            "type": "string"
+          },
+          "lastUnsuccessfulPaymentDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUBSCRIBED",
+              "UNSUBSCRIBED",
+              "CANCEL_REQUESTED"
+            ]
+          }
+        }
+      },
+      "SubscriptionRequestDto": {
+        "type": "object",
+        "required": [
+          "creditCardProfileId"
+        ],
+        "properties": {
+          "creditCardProfileId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "paymentMethodId": {
+            "type": "string"
+          }
+        }
+      },
+      "SubscriptionOfferDto": {
+        "type": "object",
+        "required": [
+          "price"
+        ],
+        "properties": {
+          "price": {
+            "type": "number"
+          },
+          "trialInformation": {
+            "$ref": "#/components/schemas/SubscriptionTrialInformationDto"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "Generated server url",
+      "url": "http://localhost:8080/api/"
+    }
+  ],
+  "openapi": "3.0.1",
+  "paths": {
+    "/v1/salad/web/subscriptions": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "operationId": "subscribe",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "web-subscriptions-controller"
+        ]
+      }
+    },
+    "/v1/salad/mobile/wallet/payment": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCardRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "operationId": "addPayment_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddCardResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "mobile-wallet-controller"
+        ]
+      }
+    },
+    "/v1/salad/web/users/profile": {
+      "get": {
+        "operationId": "getDetailedProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfileDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "users-controller"
+        ]
+      }
+    },
+    "/v1/salad/web/orders/{id}/detail": {
+      "get": {
+        "operationId": "getOrderDetail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "tags": [
+          "web-order-controller"
+        ]
+      }
+    },
+    "/v1/salad/mobile/orders/{id}/detail": {
+      "get": {
+        "operationId": "getOrderDetail_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderDetailDto"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "tags": [
+          "mobile-order-controller"
+        ]
+      }
+    },
+    "/v1/salad/mobile/subscriptions/{id}": {
+      "patch": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionUpdateRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "operationId": "updateSubscription_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "tags": [
+          "mobile-subscriptions-controller"
+        ]
+      }
+    },
+    "/v1/salad/mobile/hello": {
+      "get": {
+        "operationId": "helloWorld_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExampleUserDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "mobile-salad-controller"
+        ]
+      }
+    },
+    "/v1/salad/web/hello": {
+      "get": {
+        "operationId": "helloWorld",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "web-salad-controller"
+        ]
+      }
+    },
+    "/v1/salad/mobile/subscriptions": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "operationId": "subscribe_1",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "mobile-subscriptions-controller"
+        ]
+      },
+      "get": {
+        "operationId": "getSubscriptionOrOfferForUser",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionOfferCombinedResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "mobile-subscriptions-controller"
+        ]
+      }
+    },
+    "/v1/salad/web/subscriptions/{id}": {
+      "patch": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionUpdateRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "operationId": "updateSubscription",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "tags": [
+          "web-subscriptions-controller"
+        ]
+      }
+    },
+    "/v1/salad/web/wallet/payment": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCardRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "operationId": "addPayment",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddCardResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "web-wallet-controller"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  }
+}
